@@ -1,0 +1,215 @@
+/* ===========================
+   Moda Urbana
+   Variables CSS + Box Model moderno
+   =========================== */
+
+:root {
+  /* Colores — regla 60-30-10 + esquema complementario (fondo claro) */
+  --color-fondo: #f5f2ec;        /* 60% — neutro claro dominante */
+  --color-superficie: #e6e0d4;   /* 30% — secundario, diferencia secciones */
+  --color-texto: #1a1a1a;        /* texto: alto contraste sobre fondo claro */
+  --color-acento: #c7401f;       /* 10% — acento cálido (matiz ~12°) */
+  --color-acento-2: #0e8f82;     /* uso mínimo — complementario (matiz ~190°) */
+
+  /* Tipografía */
+  --fuente-titulo: 'Anton', sans-serif;
+  --fuente-texto: 'Inter', sans-serif;
+
+  /* Escala tipográfica (proporción ~1.25) */
+  --fs-sm: 0.9rem;
+  --fs-base: 1rem;
+  --fs-md: 1.25rem;
+  --fs-lg: 1.75rem;
+  --fs-xl: clamp(2.5rem, 6vw, 4.5rem);
+
+  /* Espaciado */
+  --espaciado-sm: 0.5rem;
+  --espaciado-md: 1rem;
+  --espaciado-lg: 2rem;
+  --espaciado-xl: 4.5rem;
+
+  --ancho-contenedor: 1100px;
+}
+
+/* Box model moderno: todo se mide incluyendo padding y border */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-fondo);
+  color: var(--color-texto);
+  font-family: var(--fuente-texto);
+  font-size: var(--fs-base);
+  line-height: 1.6;
+}
+
+.container {
+  max-width: var(--ancho-contenedor);
+  margin-inline: auto;
+  padding-inline: var(--espaciado-md);
+}
+
+h2 {
+  font-family: var(--fuente-titulo);
+  font-size: var(--fs-lg);
+  color: var(--color-texto);
+  letter-spacing: 0.02em;
+}
+
+p {
+  max-width: 62ch;
+}
+
+/* ---------- Header ---------- */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: var(--color-fondo);
+  border-bottom: 3px solid var(--color-texto);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--espaciado-sm);
+  padding-block: var(--espaciado-sm);
+}
+
+.logo {
+  font-family: var(--fuente-titulo);
+  color: var(--color-texto);
+  font-size: var(--fs-md);
+  letter-spacing: 0.03em;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: var(--espaciado-lg);
+}
+
+nav a {
+  color: var(--color-texto);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: var(--fs-sm);
+  padding-bottom: 2px;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+nav a:hover {
+  color: var(--color-acento-2);
+  border-bottom-color: var(--color-acento-2);
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  padding-block: var(--espaciado-xl);
+}
+
+.hero-title {
+  font-family: var(--fuente-titulo);
+  color: var(--color-texto);
+  font-size: var(--fs-xl);
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+
+.hero-stroke {
+  display: block;
+  width: 140px;
+  height: 10px;
+  background-color: var(--color-acento);
+  transform: skewX(-15deg);
+  margin-block: var(--espaciado-md);
+}
+
+.hero-subtitle {
+  font-size: var(--fs-md);
+  max-width: 42ch;
+  margin-bottom: var(--espaciado-lg);
+  color: var(--color-texto);
+}
+
+.btn {
+  display: inline-block;
+  background-color: var(--color-texto);
+  color: var(--color-fondo);
+  font-weight: 700;
+  text-decoration: none;
+  padding: 0.9rem 1.75rem;
+  transition: background-color 0.2s ease;
+}
+
+.btn:hover {
+  background-color: var(--color-acento);
+}
+
+/* ---------- Secciones ---------- */
+section:not(.hero) {
+  padding-block: var(--espaciado-xl);
+  border-top: 1px solid var(--color-superficie);
+}
+
+section:nth-of-type(even):not(.hero) {
+  background-color: var(--color-superficie);
+}
+
+section:not(.hero) h2 {
+  position: relative;
+  padding-top: var(--espaciado-md);
+  margin-bottom: var(--espaciado-md);
+}
+
+section:not(.hero) h2::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 48px;
+  height: 6px;
+  background-color: var(--color-acento);
+}
+
+/* ---------- Footer ---------- */
+footer {
+  padding: var(--espaciado-md);
+  text-align: center;
+  font-size: var(--fs-sm);
+  border-top: 3px solid var(--color-texto);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 640px) {
+  .header-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  nav ul {
+    gap: var(--espaciado-md);
+  }
+}
+
+/* Respeta preferencia de movimiento reducido */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  nav a, .btn {
+    transition: none;
+  }
+}
