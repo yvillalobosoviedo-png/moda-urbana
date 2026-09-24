@@ -87,6 +87,29 @@ header {
   justify-content: space-between;
   flex-wrap: wrap;
   gap: var(--espaciado-sm);
+
+  nav {
+    ul {
+      list-style: none;
+      display: flex;
+      gap: var(--espaciado-lg);
+    }
+
+    a {
+      color: var(--color-texto);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: var(--fs-sm);
+      padding-bottom: 2px;
+      border-bottom: 2px solid transparent;
+      transition: border-color 0.2s ease, color 0.2s ease;
+
+      &:hover {
+        color: var(--color-acento-2);
+        border-bottom-color: var(--color-acento-2);
+      }
+    }
+  }
 }
 
 .logo {
@@ -96,36 +119,45 @@ header {
   letter-spacing: 0.03em;
 }
 
-nav ul {
-  list-style: none;
-  display: flex;
-  gap: var(--espaciado-lg);
-}
-
-nav a {
-  color: var(--color-texto);
-  text-decoration: none;
-  font-weight: 500;
-  font-size: var(--fs-sm);
-  padding-bottom: 2px;
-  border-bottom: 2px solid transparent;
-  transition: border-color 0.2s ease, color 0.2s ease;
-}
-
-nav a:hover {
-  color: var(--color-acento-2);
-  border-bottom-color: var(--color-acento-2);
-}
-
 /* ---------- Hero ---------- */
+/* Imágenes responsive: exporta 3 versiones a /img/ con estos nombres y medidas:
+   img/hero-mobile.webp   800x1200px (o menos, <100KB)
+   img/hero-tablet.webp   1024x768px (<200KB)
+   img/hero-desktop.webp  1920x1080px (<200KB)
+   Deja el sujeto/producto centrado (zona segura) — los bordes se recortan con background-size: cover. */
 .hero {
   padding-block: var(--espaciado-xl);
   padding-inline: var(--espacio-lateral);
+  background-color: var(--color-texto);
+  /* respaldo mientras no hay imagen */
+  background-image: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), url("../img/hero-mobile.png");
+  background-size: cover;
+  background-position: center;
+  color: #fff;
+
+  .hero-title {
+    color: #fff;
+  }
+
+  .hero-subtitle {
+    color: #fff;
+  }
+}
+
+@media (min-width: 768px) {
+  .hero {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), url("../img/hero-mobile.png");
+  }
+}
+
+@media (min-width: 1200px) {
+  .hero {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), url("../img/hero-mobile.png");
+  }
 }
 
 .hero-title {
   font-family: var(--fuente-titulo);
-  color: var(--color-texto);
   font-size: var(--fs-xl);
   line-height: 0.95;
   text-transform: uppercase;
@@ -144,7 +176,6 @@ nav a:hover {
   font-size: var(--fs-md);
   max-width: 42ch;
   margin-bottom: var(--espaciado-lg);
-  color: var(--color-texto);
 }
 
 .btn {
@@ -186,6 +217,34 @@ section:not(.hero) h2::before {
   width: 48px;
   height: 6px;
   background-color: var(--color-acento);
+}
+
+/* ---------- Tarjetas (Grid) ---------- */
+.tarjetas {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--espaciado-md);
+  margin-top: var(--espaciado-lg);
+}
+
+.tarjeta {
+  background-color: var(--color-fondo);
+  border: 2px solid var(--color-texto);
+  padding: var(--espaciado-md);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.tarjeta:hover {
+  background-color: var(--color-acento);
+  border-color: var(--color-acento);
+  color: var(--color-fondo);
+}
+
+.tarjeta h3 {
+  font-family: var(--fuente-titulo);
+  font-size: var(--fs-md);
+  margin-bottom: var(--espaciado-sm);
 }
 
 /* ---------- Footer ---------- */
