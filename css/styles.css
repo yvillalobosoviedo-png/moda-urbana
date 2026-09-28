@@ -92,6 +92,7 @@ header {
     ul {
       list-style: none;
       display: flex;
+      flex-wrap: wrap;
       gap: var(--espaciado-lg);
     }
 
@@ -107,6 +108,11 @@ header {
       &:hover {
         color: var(--color-acento-2);
         border-bottom-color: var(--color-acento-2);
+      }
+
+      &:focus-visible {
+        outline: 2px solid var(--color-acento-2);
+        outline-offset: 4px;
       }
     }
   }
@@ -124,7 +130,8 @@ header {
    img/hero-mobile.webp   800x1200px (o menos, <100KB)
    img/hero-tablet.webp   1024x768px (<200KB)
    img/hero-desktop.webp  1920x1080px (<200KB)
-   Deja el sujeto/producto centrado (zona segura) — los bordes se recortan con background-size: cover. */
+   Deja el sujeto/producto centrado (zona segura) — los bordes se recortan con background-size: cover.
+   Por ahora las 3 usan la misma imagen (hero-mobile.png) hasta que exportes las otras dos. */
 .hero {
   padding-block: var(--espaciado-xl);
   padding-inline: var(--espacio-lateral);
@@ -190,6 +197,11 @@ header {
 
 .btn:hover {
   background-color: var(--color-acento);
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--color-acento);
+  outline-offset: 4px;
 }
 
 /* ---------- Secciones ---------- */
