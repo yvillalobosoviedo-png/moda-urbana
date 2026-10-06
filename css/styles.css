@@ -1,26 +1,17 @@
-/* ===========================
-   Moda Urbana
-   Variables CSS + Box Model moderno
-   =========================== */
-
+/* Variables generales del proyecto */
 :root {
-  /* Colores — regla 60-30-10 + esquema complementario (fondo claro) */
+  /* Colores */
   --color-fondo: #f5f2ec;
-  /* 60% — neutro claro dominante */
   --color-superficie: #e6e0d4;
-  /* 30% — secundario, diferencia secciones */
   --color-texto: #1a1a1a;
-  /* texto: alto contraste sobre fondo claro */
   --color-acento: #c7401f;
-  /* 10% — acento cálido (matiz ~12°) */
   --color-acento-2: #0e8f82;
-  /* uso mínimo — complementario (matiz ~190°) */
 
   /* Tipografía */
   --fuente-titulo: 'Anton', sans-serif;
   --fuente-texto: 'Inter', sans-serif;
 
-  /* Escala tipográfica (proporción ~1.25) */
+  /* Tamaños de texto */
   --fs-sm: 0.9rem;
   --fs-base: 1rem;
   --fs-md: 1.25rem;
@@ -33,19 +24,47 @@
   --espaciado-lg: 2rem;
   --espaciado-xl: 4.5rem;
 
+  /* Ancho máximo del contenido y altura del header (para el scroll-margin) */
   --ancho-contenedor: 1100px;
   --espacio-lateral: max(1rem, calc((100% - var(--ancho-contenedor)) / 2));
+  --altura-header: 4.5rem;
+
+  --radio: 0px;
+  --transicion: 0.2s ease;
 }
 
-/* Box model moderno: todo se mide incluyendo padding y border */
+/* Reset básico */
 *,
 *::before,
 *::after {
   box-sizing: border-box;
+}
+
+* {
   margin: 0;
   padding: 0;
 }
 
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+/* Configuración general del documento */
 html {
   scroll-behavior: smooth;
 }
@@ -56,15 +75,18 @@ body {
   font-family: var(--fuente-texto);
   font-size: var(--fs-base);
   line-height: 1.6;
+  overflow-x: hidden; /* evita scroll horizontal accidental */
 }
 
-h1,
-h2 {
+/* Tipografía */
+h1 {
   font-family: var(--fuente-titulo);
   color: var(--color-texto);
 }
 
 h2 {
+  font-family: var(--fuente-titulo);
+  color: var(--color-texto);
   font-size: var(--fs-lg);
   letter-spacing: 0.02em;
 }
@@ -73,7 +95,79 @@ p {
   max-width: 62ch;
 }
 
-/* ---------- Header ---------- */
+/* Enlaces */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:focus-visible {
+  outline: 2px solid var(--color-acento-2);
+  outline-offset: 4px;
+}
+
+a:active {
+  opacity: 0.85;
+}
+
+/* El contenido se centra con padding en vez de un div contenedor */
+
+/* Secciones */
+section:not(.hero) {
+  padding-block: var(--espaciado-xl);
+  padding-inline: var(--espacio-lateral);
+  border-top: 1px solid var(--color-superficie);
+}
+
+section:nth-of-type(even):not(.hero) {
+  background-color: var(--color-superficie);
+}
+
+section {
+  scroll-margin-top: var(--altura-header); /* para que el header sticky no tape el título al hacer scroll */
+}
+
+section:not(.hero) h2 {
+  position: relative;
+  padding-top: var(--espaciado-md);
+  margin-bottom: var(--espaciado-md);
+}
+
+section:not(.hero) h2::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 48px;
+  height: 6px;
+  background-color: var(--color-acento);
+}
+
+/* Botón */
+.btn {
+  display: inline-block;
+  background-color: var(--color-texto);
+  color: var(--color-fondo);
+  font-weight: 700;
+  border-radius: var(--radio);
+  padding: 0.9rem 1.75rem;
+  transition: background-color var(--transicion), transform var(--transicion);
+}
+
+.btn:hover {
+  background-color: var(--color-acento);
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--color-acento);
+  outline-offset: 4px;
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+/* Header y navegación */
 header {
   position: sticky;
   top: 0;
@@ -90,7 +184,6 @@ header {
 
   nav {
     ul {
-      list-style: none;
       display: flex;
       flex-wrap: wrap;
       gap: var(--espaciado-lg);
@@ -98,12 +191,11 @@ header {
 
     a {
       color: var(--color-texto);
-      text-decoration: none;
       font-weight: 500;
       font-size: var(--fs-sm);
       padding-bottom: 2px;
       border-bottom: 2px solid transparent;
-      transition: border-color 0.2s ease, color 0.2s ease;
+      transition: border-color var(--transicion), color var(--transicion);
 
       &:hover {
         color: var(--color-acento-2);
@@ -113,6 +205,11 @@ header {
       &:focus-visible {
         outline: 2px solid var(--color-acento-2);
         outline-offset: 4px;
+      }
+
+      &[aria-current="page"] {
+        color: var(--color-acento);
+        border-bottom-color: var(--color-acento);
       }
     }
   }
@@ -125,18 +222,39 @@ header {
   letter-spacing: 0.03em;
 }
 
-/* ---------- Hero ---------- */
-/* Imágenes responsive: exporta 3 versiones a /img/ con estos nombres y medidas:
-   img/hero-mobile.webp   800x1200px (o menos, <100KB)
-   img/hero-tablet.webp   1024x768px (<200KB)
-   img/hero-desktop.webp  1920x1080px (<200KB)
-   Deja el sujeto/producto centrado (zona segura) — los bordes se recortan con background-size: cover.
-   Por ahora las 3 usan la misma imagen (hero-mobile.png) hasta que exportes las otras dos. */
+/* Tarjetas de servicios (Grid) */
+.tarjetas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--espaciado-md);
+  margin-top: var(--espaciado-lg);
+}
+
+.tarjeta {
+  background-color: var(--color-fondo);
+  border: 2px solid var(--color-texto);
+  border-radius: var(--radio);
+  padding: var(--espaciado-md);
+  transition: background-color var(--transicion), color var(--transicion);
+}
+
+.tarjeta:hover {
+  background-color: var(--color-acento);
+  border-color: var(--color-acento);
+  color: var(--color-fondo);
+}
+
+.tarjeta h3 {
+  font-family: var(--fuente-titulo);
+  font-size: var(--fs-md);
+  margin-bottom: var(--espaciado-sm);
+}
+
+/* Hero */
 .hero {
   padding-block: var(--espaciado-xl);
   padding-inline: var(--espacio-lateral);
   background-color: var(--color-texto);
-  /* respaldo mientras no hay imagen */
   background-image: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), url("../img/hero-mobile.png");
   background-size: cover;
   background-position: center;
@@ -148,18 +266,6 @@ header {
 
   .hero-subtitle {
     color: #fff;
-  }
-}
-
-@media (min-width: 768px) {
-  .hero {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), url("../img/hero-mobile.png");
-  }
-}
-
-@media (min-width: 1200px) {
-  .hero {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), url("../img/hero-mobile.png");
   }
 }
 
@@ -185,81 +291,7 @@ header {
   margin-bottom: var(--espaciado-lg);
 }
 
-.btn {
-  display: inline-block;
-  background-color: var(--color-texto);
-  color: var(--color-fondo);
-  font-weight: 700;
-  text-decoration: none;
-  padding: 0.9rem 1.75rem;
-  transition: background-color 0.2s ease;
-}
-
-.btn:hover {
-  background-color: var(--color-acento);
-}
-
-.btn:focus-visible {
-  outline: 2px solid var(--color-acento);
-  outline-offset: 4px;
-}
-
-/* ---------- Secciones ---------- */
-section:not(.hero) {
-  padding-block: var(--espaciado-xl);
-  padding-inline: var(--espacio-lateral);
-  border-top: 1px solid var(--color-superficie);
-}
-
-section:nth-of-type(even):not(.hero) {
-  background-color: var(--color-superficie);
-}
-
-section:not(.hero) h2 {
-  position: relative;
-  padding-top: var(--espaciado-md);
-  margin-bottom: var(--espaciado-md);
-}
-
-section:not(.hero) h2::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 48px;
-  height: 6px;
-  background-color: var(--color-acento);
-}
-
-/* ---------- Tarjetas (Grid) ---------- */
-.tarjetas {
-  list-style: none;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: var(--espaciado-md);
-  margin-top: var(--espaciado-lg);
-}
-
-.tarjeta {
-  background-color: var(--color-fondo);
-  border: 2px solid var(--color-texto);
-  padding: var(--espaciado-md);
-  transition: background-color 0.2s ease, color 0.2s ease;
-}
-
-.tarjeta:hover {
-  background-color: var(--color-acento);
-  border-color: var(--color-acento);
-  color: var(--color-fondo);
-}
-
-.tarjeta h3 {
-  font-family: var(--fuente-titulo);
-  font-size: var(--fs-md);
-  margin-bottom: var(--espaciado-sm);
-}
-
-/* ---------- Footer ---------- */
+/* Footer */
 footer {
   padding-block: var(--espaciado-md);
   padding-inline: var(--espacio-lateral);
@@ -268,26 +300,26 @@ footer {
   border-top: 3px solid var(--color-texto);
 }
 
-/* ---------- Responsive ---------- */
+/* Responsive */
 @media (max-width: 640px) {
   header {
     flex-direction: column;
     align-items: flex-start;
   }
 
-  nav ul {
+  header nav ul {
     gap: var(--espaciado-md);
   }
 }
 
-/* Respeta preferencia de movimiento reducido */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
 
-  nav a,
-  .btn {
+  a,
+  .btn,
+  .tarjeta {
     transition: none;
   }
 }

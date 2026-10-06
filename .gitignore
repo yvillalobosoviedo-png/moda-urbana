@@ -1,0 +1,13 @@
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+
+# Node (si más adelante usas npm para algo)
+node_modules/
+
+# Archivos de entorno / claves (nunca deben subirse)
+.env
+*.key
