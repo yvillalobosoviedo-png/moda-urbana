@@ -1,39 +1,46 @@
-/* Variables generales del proyecto */
+/* ==========================================================
+   MODA URBANA — estilos (mobile first)
+   Orden: 1 variables · 2 reset · 3 base · 4 componentes · 5 secciones · 6 responsive
+   ========================================================== */
+
+/* 1. Variables */
 :root {
-  /* Colores */
-  --color-fondo: #f5f2ec;
-  --color-superficie: #e6e0d4;
-  --color-texto: #1a1a1a;
-  --color-acento: #c7401f;
-  --color-acento-2: #0e8f82;
+  /* Colores: concreto, asfalto y los tonos del grafiti de la foto */
+  --color-fondo: #ece9e2;
+  --color-superficie: #dcd8cd;
+  --color-texto: #141414;
+  --color-acento: #ff4a24;
+  --color-acento-2: #12b8a6;
+  --color-claro: #ffffff;
 
   /* Tipografía */
-  --fuente-titulo: 'Anton', sans-serif;
-  --fuente-texto: 'Inter', sans-serif;
+  --fuente-titulo: 'Anton', 'Impact', sans-serif;
+  --fuente-texto: 'Inter', system-ui, sans-serif;
 
-  /* Tamaños de texto */
+  /* Escala de texto */
   --fs-sm: 0.9rem;
   --fs-base: 1rem;
   --fs-md: 1.25rem;
-  --fs-lg: 1.75rem;
-  --fs-xl: clamp(2.5rem, 6vw, 4.5rem);
+  --fs-lg: clamp(2.25rem, 8vw, 4rem);
+  --fs-xl: clamp(4rem, 19vw, 9.5rem);
 
   /* Espaciado */
   --espaciado-sm: 0.5rem;
   --espaciado-md: 1rem;
   --espaciado-lg: 2rem;
-  --espaciado-xl: 4.5rem;
+  --espaciado-xl: clamp(3.5rem, 9vw, 6.5rem);
 
-  /* Ancho máximo del contenido y altura del header (para el scroll-margin) */
+  /* Layout */
   --ancho-contenedor: 1100px;
-  --espacio-lateral: max(1rem, calc((100% - var(--ancho-contenedor)) / 2));
+  --espacio-lateral: max(1.25rem, calc((100% - var(--ancho-contenedor)) / 2));
   --altura-header: 4.5rem;
-
+  --borde: 3px solid var(--color-texto);
+  --sombra-dura: 8px 8px 0 var(--color-texto);
   --radio: 0px;
   --transicion: 0.2s ease;
 }
 
-/* Reset básico */
+/* 2. Reset */
 *,
 *::before,
 *::after {
@@ -51,20 +58,16 @@ picture {
   display: block;
 }
 
-button,
-input,
-textarea,
-select {
+button, input, textarea, select {
   font: inherit;
   color: inherit;
 }
 
-ul,
-ol {
+ul, ol {
   list-style: none;
 }
 
-/* Configuración general del documento */
+/* 3. Base */
 html {
   scroll-behavior: smooth;
 }
@@ -74,247 +77,488 @@ body {
   color: var(--color-texto);
   font-family: var(--fuente-texto);
   font-size: var(--fs-base);
-  line-height: 1.6;
-  overflow-x: hidden; /* evita scroll horizontal accidental */
+  line-height: 1.65;
+  overflow-x: hidden;
 }
 
-/* Tipografía */
-h1 {
+h1,
+h2 {
   font-family: var(--fuente-titulo);
+  font-weight: 400;
   color: var(--color-texto);
+  text-transform: uppercase;
+  line-height: 0.95;
 }
 
 h2 {
-  font-family: var(--fuente-titulo);
-  color: var(--color-texto);
   font-size: var(--fs-lg);
-  letter-spacing: 0.02em;
+  letter-spacing: 0.01em;
+}
+
+h3 {
+  font-family: var(--fuente-titulo);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  font-size: var(--fs-md);
 }
 
 p {
   max-width: 62ch;
 }
 
-/* Enlaces */
 a {
   color: inherit;
   text-decoration: none;
 }
 
-a:focus-visible {
-  outline: 2px solid var(--color-acento-2);
+:focus-visible {
+  outline: 3px solid var(--color-acento-2);
   outline-offset: 4px;
 }
 
-a:active {
-  opacity: 0.85;
-}
-
-/* El contenido se centra con padding en vez de un div contenedor */
-
-/* Secciones */
-section:not(.hero) {
-  padding-block: var(--espaciado-xl);
-  padding-inline: var(--espacio-lateral);
-  border-top: 1px solid var(--color-superficie);
-}
-
-section:nth-of-type(even):not(.hero) {
-  background-color: var(--color-superficie);
-}
-
 section {
-  scroll-margin-top: var(--altura-header); /* para que el header sticky no tape el título al hacer scroll */
+  scroll-margin-top: var(--altura-header);
 }
 
-section:not(.hero) h2 {
-  position: relative;
-  padding-top: var(--espaciado-md);
-  margin-bottom: var(--espaciado-md);
-}
-
-section:not(.hero) h2::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 48px;
-  height: 6px;
-  background-color: var(--color-acento);
-}
+/* 4. Componentes */
 
 /* Botón */
 .btn {
   display: inline-block;
-  background-color: var(--color-texto);
-  color: var(--color-fondo);
-  font-weight: 700;
-  border-radius: var(--radio);
-  padding: 0.9rem 1.75rem;
-  transition: background-color var(--transicion), transform var(--transicion);
-}
-
-.btn:hover {
   background-color: var(--color-acento);
+  color: var(--color-texto);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border: var(--borde);
+  border-color: var(--color-claro);
+  border-radius: var(--radio);
+  padding: 0.95rem 1.9rem;
+  box-shadow: 6px 6px 0 var(--color-claro);
+  transition: transform var(--transicion), box-shadow var(--transicion);
+
+  &:hover {
+    transform: translate(3px, 3px);
+    box-shadow: 3px 3px 0 var(--color-claro);
+  }
+
+  &:active {
+    transform: translate(6px, 6px);
+    box-shadow: 0 0 0 var(--color-claro);
+  }
 }
 
-.btn:focus-visible {
-  outline: 2px solid var(--color-acento);
-  outline-offset: 4px;
-}
-
-.btn:active {
-  transform: scale(0.97);
-}
-
-/* Header y navegación */
-header {
+/* Barra de navegación (Flexbox) */
+.barra-nav {
   position: sticky;
   top: 0;
   z-index: 10;
   background-color: var(--color-fondo);
-  border-bottom: 3px solid var(--color-texto);
+  border-bottom: var(--borde);
   padding-inline: var(--espacio-lateral);
   padding-block: var(--espaciado-sm);
+  min-height: var(--altura-header);
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  flex-wrap: wrap;
-  gap: var(--espaciado-sm);
+  gap: 0 var(--espaciado-lg);
 
-  nav {
-    ul {
-      display: flex;
-      flex-wrap: wrap;
-      gap: var(--espaciado-lg);
-    }
+  .logo {
+    font-family: var(--fuente-titulo);
+    font-size: 1.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    line-height: 1;
 
     a {
-      color: var(--color-texto);
-      font-weight: 500;
-      font-size: var(--fs-sm);
-      padding-bottom: 2px;
-      border-bottom: 2px solid transparent;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    img {
+      width: 2.5rem;
+      height: 2.5rem;
+    }
+
+    span {
+      color: var(--color-acento);
+      margin-left: -0.35em; /* compensa el gap: se lee "ModaUrbana" como una sola marca */
+    }
+  }
+
+  .menu {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--espaciado-md) var(--espaciado-lg);
+
+    a {
+      display: inline-block;
+      padding-block: 0.6rem;
+      font-weight: 700;
+      font-size: 1rem;
+      border-bottom: 3px solid transparent;
       transition: border-color var(--transicion), color var(--transicion);
 
       &:hover {
-        color: var(--color-acento-2);
-        border-bottom-color: var(--color-acento-2);
-      }
-
-      &:focus-visible {
-        outline: 2px solid var(--color-acento-2);
-        outline-offset: 4px;
+        color: var(--color-acento);
+        border-bottom-color: var(--color-acento);
       }
 
       &[aria-current="page"] {
-        color: var(--color-acento);
-        border-bottom-color: var(--color-acento);
+        border-bottom-color: var(--color-texto);
       }
     }
   }
 }
 
-.logo {
-  font-family: var(--fuente-titulo);
+/* Cinta en movimiento */
+.cinta {
+  overflow: hidden;
+  background-color: var(--color-acento);
   color: var(--color-texto);
-  font-size: var(--fs-md);
-  letter-spacing: 0.03em;
+  border-block: var(--borde);
+  transform: rotate(-1.2deg) scale(1.03);
+  margin-block: -0.6rem;
+  position: relative;
+  z-index: 2;
+
+  .cinta-pista {
+    display: flex;
+    width: max-content;
+    animation: desplazar 30s linear infinite;
+  }
+
+  .cinta-grupo {
+    display: flex;
+    flex-shrink: 0;
+    max-width: none;
+    padding-block: 0.7rem;
+    font-family: var(--fuente-titulo);
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    line-height: 1;
+
+    span {
+      padding-inline: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+
+      &::after {
+        content: "";
+        width: 0.7rem;
+        height: 0.7rem;
+        background-color: var(--color-texto);
+        transform: rotate(45deg);
+      }
+    }
+  }
+}
+
+@keyframes desplazar {
+  to { transform: translateX(-50%); }
 }
 
 /* Tarjetas de servicios (Grid) */
 .tarjetas {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: var(--espaciado-md);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: var(--espaciado-lg);
   margin-top: var(--espaciado-lg);
+
+  > li {
+    display: flex; /* todas las tarjetas de una fila igual de altas */
+    min-width: 0; /* evita que el contenido ensanche la columna */
+  }
 }
 
 .tarjeta {
-  background-color: var(--color-fondo);
-  border: 2px solid var(--color-texto);
+  flex: 1;
+  min-width: 0;
+  background-color: var(--color-claro);
+  border: var(--borde);
   border-radius: var(--radio);
   padding: var(--espaciado-md);
-  transition: background-color var(--transicion), color var(--transicion);
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaciado-sm);
+  transition: transform var(--transicion), box-shadow var(--transicion);
+
+  &:hover {
+    transform: translate(-4px, -4px);
+    box-shadow: var(--sombra-dura);
+  }
+
+  h3 {
+    font-size: 1.75rem;
+    margin-top: var(--espaciado-sm);
+  }
+
+  p {
+    font-size: var(--fs-sm);
+  }
+
+  img {
+    flex: none;
+    width: 100%;
+    height: 16rem; /* misma altura en todas, también en la tarjeta ancha */
+    object-fit: cover;
+    border: 2px solid var(--color-texto);
+    background-color: var(--color-superficie);
+  }
 }
 
-.tarjeta:hover {
-  background-color: var(--color-acento);
-  border-color: var(--color-acento);
-  color: var(--color-fondo);
-}
+/* 5. Secciones */
 
-.tarjeta h3 {
-  font-family: var(--fuente-titulo);
-  font-size: var(--fs-md);
-  margin-bottom: var(--espaciado-sm);
-}
-
-/* Hero */
+/* Hero (mobile first: foto de fondo a pantalla completa) */
 .hero {
+  position: relative;
+  isolation: isolate;
+  min-height: calc(100svh - var(--altura-header));
+  display: grid;
+  align-content: end;
   padding-block: var(--espaciado-xl);
   padding-inline: var(--espacio-lateral);
   background-color: var(--color-texto);
-  background-image: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), url("../img/hero-mobile.png");
-  background-size: cover;
-  background-position: center;
-  color: #fff;
+  color: var(--color-claro);
+  overflow: hidden; /* la foto nunca se sale del hero */
+
+  .hero-figure {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    margin: 0;
+
+    picture {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 50% 30%;
+    }
+
+    /* capa oscura para que el texto blanco se lea */
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgb(0 0 0 / 0.85), rgb(0 0 0 / 0.35) 65%, rgb(0 0 0 / 0.15));
+    }
+  }
+
+  .sello {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 1;
+    max-width: 9rem;
+    padding: 0.6rem 0.9rem;
+    background-color: var(--color-acento-2);
+    color: var(--color-texto);
+    border: 2px solid var(--color-texto);
+    font-family: var(--fuente-titulo);
+    font-size: 1rem;
+    line-height: 1.1;
+    text-transform: uppercase;
+    text-align: center;
+    transform: rotate(8deg);
+  }
 
   .hero-title {
-    color: #fff;
+    font-size: var(--fs-xl);
+    color: var(--color-claro);
+
+    span {
+      color: transparent;
+      -webkit-text-stroke: 2px var(--color-claro);
+    }
+  }
+
+  .hero-stroke {
+    display: block;
+    width: 150px;
+    height: 12px;
+    background-color: var(--color-acento);
+    transform: skewX(-15deg);
+    margin-block: var(--espaciado-md);
   }
 
   .hero-subtitle {
-    color: #fff;
+    font-size: var(--fs-md);
+    max-width: 34ch;
+    margin-bottom: var(--espaciado-lg);
+    color: var(--color-claro);
   }
 }
 
-.hero-title {
+/* Secciones generales */
+.seccion {
+  padding-block: var(--espaciado-xl);
+  padding-inline: var(--espacio-lateral);
+
+  h2 {
+    position: relative;
+    padding-top: var(--espaciado-md);
+    margin-bottom: var(--espaciado-md);
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 56px;
+      height: 8px;
+      background-color: var(--color-acento);
+      transform: skewX(-15deg);
+    }
+  }
+}
+
+.seccion-superficie {
+  background-color: var(--color-superficie);
+}
+
+.seccion-oscura {
+  background-color: var(--color-texto);
+  color: var(--color-fondo);
+
+  h2 {
+    color: var(--color-fondo);
+  }
+}
+
+/* Nosotros */
+.nosotros {
+  display: grid;
+  gap: var(--espaciado-lg);
+
+  .destacado {
+    font-size: var(--fs-md);
+    font-weight: 700;
+    line-height: 1.4;
+    margin-bottom: var(--espaciado-md);
+  }
+}
+
+.pilares {
+  display: grid;
+  gap: var(--espaciado-lg);
+}
+
+.pilar {
+  background-color: var(--color-fondo);
+  border: var(--borde);
+  box-shadow: var(--sombra-dura);
+  padding: var(--espaciado-lg);
+
+  h3 {
+    font-size: 1.75rem;
+    margin-bottom: var(--espaciado-sm);
+  }
+
+  &.pilar-alt {
+    background-color: var(--color-acento-2);
+  }
+}
+
+/* Contacto */
+.correo {
+  display: inline-block;
+  margin-top: var(--espaciado-lg);
   font-family: var(--fuente-titulo);
-  font-size: var(--fs-xl);
-  line-height: 0.95;
-  text-transform: uppercase;
+  font-size: clamp(1.4rem, 6vw, 3rem);
+  letter-spacing: 0.02em;
+  overflow-wrap: anywhere;
+  border-bottom: 5px solid var(--color-acento);
+  transition: color var(--transicion);
+
+  &:hover {
+    color: var(--color-acento);
+  }
 }
 
-.hero-stroke {
-  display: block;
-  width: 140px;
-  height: 10px;
-  background-color: var(--color-acento);
-  transform: skewX(-15deg);
-  margin-block: var(--espaciado-md);
-}
+.redes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espaciado-md);
+  margin-top: var(--espaciado-lg);
 
-.hero-subtitle {
-  font-size: var(--fs-md);
-  max-width: 42ch;
-  margin-bottom: var(--espaciado-lg);
+  a {
+    display: inline-block;
+    padding: 0.7rem 1.4rem;
+    border: 2px solid var(--color-fondo);
+    font-weight: 700;
+    transition: background-color var(--transicion), color var(--transicion);
+
+    &:hover {
+      background-color: var(--color-fondo);
+      color: var(--color-texto);
+    }
+  }
 }
 
 /* Footer */
 footer {
   padding-block: var(--espaciado-md);
   padding-inline: var(--espacio-lateral);
+  background-color: var(--color-texto);
+  color: var(--color-fondo);
+  border-top: 3px solid var(--color-acento);
   text-align: center;
   font-size: var(--fs-sm);
-  border-top: 3px solid var(--color-texto);
+
+  p {
+    max-width: none;
+  }
 }
 
-/* Responsive */
-@media (max-width: 640px) {
-  header {
-    flex-direction: column;
-    align-items: flex-start;
+/* 6. Responsive (de menor a mayor) */
+@media (min-width: 56rem) {
+  .nosotros {
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: var(--espaciado-xl);
+    align-items: start;
   }
 
-  header nav ul {
-    gap: var(--espaciado-md);
+  /* Hero: la foto de escritorio ocupa toda la pantalla */
+  .hero {
+    align-content: center;
+
+    .hero-texto {
+      max-width: 40rem;
+    }
+
+    .hero-figure::after {
+      background: linear-gradient(90deg, rgb(0 0 0 / 0.8), rgb(0 0 0 / 0.4) 55%, rgb(0 0 0 / 0.15));
+    }
+
+    .sello {
+      top: 2rem;
+      bottom: auto;
+      right: var(--espacio-lateral);
+      max-width: 10rem;
+      font-size: 1.2rem;
+    }
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+
+  .cinta .cinta-pista {
+    animation: none;
   }
 
   a,

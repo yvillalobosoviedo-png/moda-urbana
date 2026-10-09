@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Moda Urbana">
+  <rect width="64" height="64" fill="#141414"/>
+  <polygon fill="#ece9e2" points="10,50 10,12 21,12 32,30 43,12 54,12 54,50 44,50 44,29 32,47 20,29 20,50"/>
+  <polygon fill="#ff4a24" points="8,55 48,55 44,61 4,61"/>
+</svg>

@@ -3,18 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Moda Urbana: hoodies, camisetas oversize, gorras, joggers y sneakers con diseños inspirados en el arte callejero.">
   <title>Moda Urbana | Tu Estilo, Tu Ciudad</title>
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="favicon.ico" sizes="32x32">
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+  <meta name="theme-color" content="#141414">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
+  <script src="js/script.js" defer></script>
 </head>
 <body>
 
-  <header>
-    <p class="logo">Moda Urbana</p>
-    <nav>
-      <ul>
+  <header class="barra-nav">
+    <p class="logo"><a href="#inicio"><img src="img/logo.svg" width="40" height="40" alt="">Moda<span>Urbana</span></a></p>
+    <nav aria-label="Principal">
+      <ul class="menu">
         <li><a href="#inicio">Inicio</a></li>
         <li><a href="#nosotros">Nosotros</a></li>
         <li><a href="#servicios">Servicios</a></li>
@@ -26,51 +32,108 @@
   <main>
 
     <section id="inicio" class="hero">
-      <h1 class="hero-title">Vístete<br>de calle.</h1>
-      <span class="hero-stroke"></span>
-      <p class="hero-subtitle">Ropa urbana diseñada para quienes viven la ciudad a su manera.</p>
-      <a href="#servicios" class="btn">Ver colección</a>
+      <div class="hero-texto">
+        <h1 class="hero-title">Vístete<br><span>de calle.</span></h1>
+        <span class="hero-stroke"></span>
+        <p class="hero-subtitle">Ropa urbana diseñada para quienes viven la ciudad a su manera.</p>
+        <a href="#servicios" class="btn">Ver colección</a>
+      </div>
+      <figure class="hero-figure">
+        <picture>
+          <source media="(min-width: 896px)" srcset="img/hero-desk.webp">
+          <source media="(min-width: 640px)" srcset="img/hero-tablet.webp">
+          <img src="img/hero-mobile.webp" width="1024" height="1536" fetchpriority="high"
+               alt="Joven sentado frente a un muro con grafiti, con hoodie negro, pantalón cargo y sneakers, junto a un skate">
+        </picture>
+        <figcaption class="sello">Nueva colección 2026</figcaption>
+      </figure>
     </section>
 
-    <section id="nosotros">
-      <h2>Nosotros</h2>
-      <p>Moda Urbana es una tienda ficticia especializada en ropa y accesorios streetwear: hoodies, camisetas oversize, gorras, joggers y sneakers, con diseños inspirados en el arte callejero, el skate y el hip-hop.</p>
+    <div class="cinta" aria-hidden="true">
+      <div class="cinta-pista">
+        <p class="cinta-grupo"><span>Hoodies</span><span>Camisetas oversize</span><span>Gorras</span><span>Joggers</span><span>Sneakers</span></p>
+        <p class="cinta-grupo"><span>Hoodies</span><span>Camisetas oversize</span><span>Gorras</span><span>Joggers</span><span>Sneakers</span></p>
+      </div>
+    </div>
+
+    <section id="nosotros" class="seccion seccion-superficie">
+      <div class="nosotros">
+        <div>
+          <h2>Nosotros</h2>
+          <p class="destacado">Moda Urbana nace del arte callejero, el skate y el hip-hop. Hacemos ropa para quien no pide permiso para destacar.</p>
+          <p>Somos una tienda especializada en ropa y accesorios streetwear: hoodies, camisetas oversize, gorras, joggers y sneakers, con diseños propios y actualizados a las tendencias.</p>
+        </div>
+        <div class="pilares">
+          <article class="pilar">
+            <h3>Visión</h3>
+            <p>Ser la tienda en línea de referencia para quienes buscan prendas urbanas con diseños originales y actuales, marcando tendencia en moda streetwear.</p>
+          </article>
+          <article class="pilar pilar-alt">
+            <h3>Misión</h3>
+            <p>Vender ropa y accesorios urbanos de calidad, con diseños propios, ofreciendo un catálogo fácil de explorar y comprar desde el sitio web.</p>
+          </article>
+        </div>
+      </div>
     </section>
 
-    <section id="servicios">
+    <section id="servicios" class="seccion">
       <h2>Servicios</h2>
       <p>Conoce nuestras colecciones y catálogo de prendas urbanas.</p>
       <ul class="tarjetas">
         <li>
           <article class="tarjeta">
+            <img src="img/hoodies.webp" width="800" height="600" loading="lazy" alt="Hoodies de la colección Moda Urbana">
             <h3>Hoodies</h3>
             <p>Estampados propios, corte oversize.</p>
           </article>
         </li>
         <li>
           <article class="tarjeta">
+            <img src="img/camisetas.webp" width="800" height="600" loading="lazy" alt="Camisetas oversize con gráficas urbanas">
             <h3>Camisetas</h3>
             <p>Gráficas inspiradas en arte callejero.</p>
           </article>
         </li>
         <li>
           <article class="tarjeta">
+            <img src="img/gorras.webp" width="800" height="600" loading="lazy" alt="Gorras snapback y trucker">
             <h3>Gorras</h3>
             <p>Snapback y trucker, edición limitada.</p>
           </article>
         </li>
         <li>
           <article class="tarjeta">
+            <img src="img/joggers.webp" width="800" height="600" loading="lazy" alt="Joggers cargo de corte holgado">
+            <h3>Joggers</h3>
+            <p>Cortes cargo y holgados para moverte sin límites.</p>
+          </article>
+        </li>
+        <li>
+          <article class="tarjeta">
+            <img src="img/sneakers.webp" width="800" height="600" loading="lazy" alt="Sneakers de edición limitada">
             <h3>Sneakers</h3>
             <p>Colaboraciones exclusivas de temporada.</p>
+          </article>
+        </li>
+        <li>
+          <article class="tarjeta">
+            <img src="img/accesorios.webp" width="800" height="600" loading="lazy" alt="Accesorios urbanos: mochilas, medias y cintas">
+            <h3>Accesorios</h3>
+            <p>Mochilas, medias y detalles para completar tu look.</p>
           </article>
         </li>
       </ul>
     </section>
 
-    <section id="contacto">
+    <section id="contacto" class="seccion seccion-oscura">
       <h2>Contacto</h2>
       <p>Escríbenos y síguenos en nuestras redes.</p>
+      <a class="correo" href="mailto:hola@modaurbana.example">hola@modaurbana.example</a>
+      <ul class="redes">
+        <li><a href="https://www.instagram.com/">Instagram</a></li>
+        <li><a href="https://www.tiktok.com/">TikTok</a></li>
+        <li><a href="https://www.whatsapp.com/">WhatsApp</a></li>
+      </ul>
     </section>
 
   </main>
