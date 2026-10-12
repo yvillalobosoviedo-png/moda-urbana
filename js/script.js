@@ -9,10 +9,14 @@ const tituloHero = document.querySelector(".hero-title");
 const seccionServicios = document.querySelector("#servicios");
 const tarjetasServicios = document.querySelectorAll(".tarjeta");
 const enlaceCorreo = document.querySelector(".correo");
+const botonMenu = document.querySelector("#btn-menu");
+const navegacionPrincipal = document.querySelector("#menu-principal");
 
 /* =====================================================
    2. VARIABLES
 ===================================================== */
+
+const pantallaAncha = window.matchMedia("(min-width: 48rem)");
 
 const elementosEsperados = [
   { nombre: "Barra de navegación", selector: ".barra-nav", resultado: barraNavegacion },
@@ -22,6 +26,8 @@ const elementosEsperados = [
   { nombre: "Sección servicios", selector: "#servicios", resultado: seccionServicios },
   { nombre: "Tarjetas de servicios", selector: ".tarjeta", resultado: tarjetasServicios },
   { nombre: "Enlace de correo", selector: ".correo", resultado: enlaceCorreo },
+  { nombre: "Botón del menú", selector: "#btn-menu", resultado: botonMenu },
+  { nombre: "Navegación principal", selector: "#menu-principal", resultado: navegacionPrincipal },
 ];
 
 /* =====================================================
@@ -46,12 +52,47 @@ const comprobarEnlacesMenu = () => {
   });
 };
 
+const establecerMenu = (abierto) => {
+  navegacionPrincipal.classList.toggle("is-open", abierto);
+  botonMenu.setAttribute("aria-expanded", String(abierto));
+  botonMenu.setAttribute(
+    "aria-label",
+    abierto ? "Cerrar menú de navegación" : "Abrir menú de navegación"
+  );
+};
+
+const alternarMenu = () => {
+  const estaAbierto = botonMenu.getAttribute("aria-expanded") === "true";
+  establecerMenu(!estaAbierto);
+};
+
+const cerrarMenu = () => {
+  establecerMenu(false);
+};
+
+const cerrarConEscape = (event) => {
+  if (event.key === "Escape" && botonMenu.getAttribute("aria-expanded") === "true") {
+    cerrarMenu();
+    botonMenu.focus();
+  }
+};
+
 /* =====================================================
-   4. INICIALIZACIÓN
+   4. EVENTOS
 ===================================================== */
 
-console.log("✅ script.js cargado correctamente");
+if (botonMenu && navegacionPrincipal) {
+  botonMenu.addEventListener("click", alternarMenu);
+  document.addEventListener("keydown", cerrarConEscape);
+  enlacesMenu.forEach((enlace) => enlace.addEventListener("click", cerrarMenu));
+  pantallaAncha.addEventListener("change", cerrarMenu);
+}
+
+/* =====================================================
+   5. INICIALIZACIÓN
+===================================================== */
+
+console.log("script.js cargado correctamente");
 
 elementosEsperados.forEach(comprobarElemento);
 comprobarEnlacesMenu();
-

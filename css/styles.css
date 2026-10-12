@@ -1,8 +1,3 @@
-/* ==========================================================
-   MODA URBANA — estilos (mobile first)
-   Orden: 1 variables · 2 reset · 3 base · 4 componentes · 5 secciones · 6 responsive
-   ========================================================== */
-
 /* 1. Variables */
 :root {
   /* Colores: concreto, asfalto y los tonos del grafiti de la foto */
@@ -58,12 +53,16 @@ picture {
   display: block;
 }
 
-button, input, textarea, select {
+button,
+input,
+textarea,
+select {
   font: inherit;
   color: inherit;
 }
 
-ul, ol {
+ul,
+ol {
   list-style: none;
 }
 
@@ -185,19 +184,98 @@ section {
 
     span {
       color: var(--color-acento);
-      margin-left: -0.35em; /* compensa el gap: se lee "ModaUrbana" como una sola marca */
+      margin-left: -0.35em;
+      /* compensa el gap: se lee "ModaUrbana" como una sola marca */
+    }
+  }
+
+  /* Botón del menú móvil */
+  .btn-menu {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    min-height: 2.75rem;
+    padding: 0 1rem;
+    background-color: var(--color-claro);
+    border: var(--borde);
+    box-shadow: 4px 4px 0 var(--color-texto);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    transition: background-color var(--transicion), box-shadow var(--transicion), transform var(--transicion);
+
+    &:hover {
+      background-color: var(--color-acento-2);
+    }
+
+    &[aria-expanded="true"] {
+      background-color: var(--color-acento);
+      box-shadow: 0 0 0 var(--color-texto);
+      transform: translate(4px, 4px);
+    }
+
+    /* icono de hamburguesa que se vuelve X */
+    .btn-menu-icono,
+    .btn-menu-icono::before,
+    .btn-menu-icono::after {
+      display: block;
+      width: 1.25rem;
+      height: 2px;
+      background-color: currentColor;
+      transition: transform var(--transicion), background-color var(--transicion);
+    }
+
+    .btn-menu-icono {
+      position: relative;
+
+      &::before,
+      &::after {
+        content: "";
+        position: absolute;
+        left: 0;
+      }
+
+      &::before {
+        top: -6px;
+      }
+
+      &::after {
+        top: 6px;
+      }
+    }
+
+    &[aria-expanded="true"] .btn-menu-icono {
+      background-color: transparent;
+
+      &::before {
+        transform: translateY(6px) rotate(45deg);
+      }
+
+      &::after {
+        transform: translateY(-6px) rotate(-45deg);
+      }
+    }
+  }
+
+  /* En móvil el menú está cerrado hasta que JavaScript le agrega .is-open */
+  nav {
+    display: none;
+    flex-basis: 100%;
+
+    &.is-open {
+      display: block;
     }
   }
 
   .menu {
     display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: var(--espaciado-md) var(--espaciado-lg);
+    flex-direction: column;
+    padding-block: var(--espaciado-sm);
 
     a {
-      display: inline-block;
-      padding-block: 0.6rem;
+      display: block;
+      padding-block: 0.9rem;
       font-weight: 700;
       font-size: 1rem;
       border-bottom: 3px solid transparent;
@@ -261,7 +339,9 @@ section {
 }
 
 @keyframes desplazar {
-  to { transform: translateX(-50%); }
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 /* Tarjetas de servicios (Grid) */
@@ -271,9 +351,11 @@ section {
   gap: var(--espaciado-lg);
   margin-top: var(--espaciado-lg);
 
-  > li {
-    display: flex; /* todas las tarjetas de una fila igual de altas */
-    min-width: 0; /* evita que el contenido ensanche la columna */
+  >li {
+    display: flex;
+    /* todas las tarjetas de una fila igual de altas */
+    min-width: 0;
+    /* evita que el contenido ensanche la columna */
   }
 }
 
@@ -306,7 +388,8 @@ section {
   img {
     flex: none;
     width: 100%;
-    height: 16rem; /* misma altura en todas, también en la tarjeta ancha */
+    height: 16rem;
+    /* misma altura en todas, también en la tarjeta ancha */
     object-fit: cover;
     border: 2px solid var(--color-texto);
     background-color: var(--color-superficie);
@@ -326,7 +409,8 @@ section {
   padding-inline: var(--espacio-lateral);
   background-color: var(--color-texto);
   color: var(--color-claro);
-  overflow: hidden; /* la foto nunca se sale del hero */
+  overflow: hidden;
+  /* la foto nunca se sale del hero */
 
   .hero-figure {
     position: absolute;
@@ -523,6 +607,34 @@ footer {
 }
 
 /* 6. Responsive (de menor a mayor) */
+@media (min-width: 48rem) {
+
+  /* Pantallas anchas: el menú siempre visible, sin botón */
+  .barra-nav {
+    .btn-menu {
+      display: none;
+    }
+
+    nav {
+      display: block;
+      flex-basis: auto;
+    }
+
+    .menu {
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--espaciado-md) var(--espaciado-lg);
+      padding-block: 0;
+
+      a {
+        display: inline-block;
+        padding-block: 0.6rem;
+      }
+    }
+  }
+}
+
 @media (min-width: 56rem) {
   .nosotros {
     grid-template-columns: 1.1fr 0.9fr;
@@ -559,6 +671,13 @@ footer {
 
   .cinta .cinta-pista {
     animation: none;
+  }
+
+  .btn-menu,
+  .btn-menu .btn-menu-icono,
+  .btn-menu .btn-menu-icono::before,
+  .btn-menu .btn-menu-icono::after {
+    transition: none;
   }
 
   a,
