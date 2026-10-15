@@ -1,3 +1,8 @@
+/* ==========================================================
+   MODA URBANA — estilos (mobile first)
+   Orden: 1 variables · 2 reset · 3 base · 4 componentes · 5 secciones · 6 responsive
+   ========================================================== */
+
 /* 1. Variables */
 :root {
   /* Colores: concreto, asfalto y los tonos del grafiti de la foto */
@@ -7,6 +12,7 @@
   --color-acento: #ff4a24;
   --color-acento-2: #12b8a6;
   --color-claro: #ffffff;
+  --color-error: #ff7a5c;
 
   /* Tipografía */
   --fuente-titulo: 'Anton', 'Impact', sans-serif;
@@ -135,6 +141,7 @@ section {
   border-radius: var(--radio);
   padding: 0.95rem 1.9rem;
   box-shadow: 6px 6px 0 var(--color-claro);
+  cursor: pointer;
   transition: transform var(--transicion), box-shadow var(--transicion);
 
   &:hover {
@@ -591,6 +598,103 @@ section {
   }
 }
 
+/* Formulario de contacto */
+.contacto-grid {
+  display: grid;
+  gap: var(--espaciado-xl);
+}
+
+.formulario {
+  display: grid;
+  gap: var(--espaciado-md);
+  align-content: start;
+  padding: var(--espaciado-lg);
+  border: 3px solid var(--color-fondo);
+  box-shadow: 8px 8px 0 var(--color-acento);
+
+  h3 {
+    font-size: 1.75rem;
+  }
+
+  .formulario-nota {
+    font-size: var(--fs-sm);
+  }
+
+  .campo {
+    display: grid;
+    gap: 0.4rem;
+  }
+
+  label {
+    font-size: var(--fs-sm);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  input,
+  textarea {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+    border: 3px solid var(--color-fondo);
+    border-radius: var(--radio);
+    font-size: var(--fs-base);
+
+    &[aria-invalid="true"] {
+      border-color: var(--color-error);
+    }
+  }
+
+  textarea {
+    min-height: 8rem;
+    resize: vertical;
+  }
+
+  .campo small {
+    font-size: var(--fs-sm);
+  }
+
+  .error {
+    color: var(--color-error);
+    font-weight: 700;
+
+    &:not(:empty)::before {
+      content: "⚠ ";
+    }
+  }
+
+  .btn {
+    justify-self: start;
+  }
+
+  /* Sin estilos hasta que JavaScript le agrega .is-visible (envío correcto) */
+  .formulario-estado {
+    margin-top: calc(var(--espaciado-md) * -1);
+    /* anula el gap del grid mientras no se ve */
+    font-weight: 700;
+
+    &.is-visible {
+      margin-top: 0;
+      padding: var(--espaciado-md);
+      background-color: var(--color-acento-2);
+      color: var(--color-texto);
+      border: 3px solid var(--color-texto);
+    }
+
+    /* aviso cuando faltan datos: solo texto, sin recuadro verde */
+    &.is-error {
+      margin-top: 0;
+      color: var(--color-error);
+
+      &::before {
+        content: "⚠ ";
+      }
+    }
+  }
+}
+
 /* Footer */
 footer {
   padding-block: var(--espaciado-md);
@@ -636,6 +740,11 @@ footer {
 }
 
 @media (min-width: 56rem) {
+  .contacto-grid {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+
   .nosotros {
     grid-template-columns: 1.1fr 0.9fr;
     gap: var(--espaciado-xl);
