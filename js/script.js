@@ -20,10 +20,18 @@ const errorNombre = document.querySelector("#error-nombre");
 const errorCorreo = document.querySelector("#error-correo");
 const errorMensaje = document.querySelector("#error-mensaje");
 
-const camposFormulario = [
-  { elemento: campoNombre, error: errorNombre },
-  { elemento: campoCorreo, error: errorCorreo },
-  { elemento: campoMensaje, error: errorMensaje },
+const camposFormulario = [{
+    elemento: campoNombre,
+    error: errorNombre
+  },
+  {
+    elemento: campoCorreo,
+    error: errorCorreo
+  },
+  {
+    elemento: campoMensaje,
+    error: errorMensaje
+  },
 ];
 
 /* =====================================================
@@ -32,26 +40,77 @@ const camposFormulario = [
 
 const pantallaAncha = window.matchMedia("(min-width: 48rem)");
 
-const elementosEsperados = [
-  { nombre: "Barra de navegación", selector: ".barra-nav", resultado: barraNavegacion },
-  { nombre: "Menú principal", selector: ".menu", resultado: menuPrincipal },
-  { nombre: "Enlaces del menú", selector: ".menu a", resultado: enlacesMenu },
-  { nombre: "Título del hero", selector: ".hero-title", resultado: tituloHero },
-  { nombre: "Sección servicios", selector: "#servicios", resultado: seccionServicios },
-  { nombre: "Tarjetas de servicios", selector: ".tarjeta", resultado: tarjetasServicios },
-  { nombre: "Enlace de correo", selector: ".correo", resultado: enlaceCorreo },
-  { nombre: "Botón del menú", selector: "#btn-menu", resultado: botonMenu },
-  { nombre: "Navegación principal", selector: "#menu-principal", resultado: navegacionPrincipal },
-  { nombre: "Formulario de contacto", selector: "#formulario-contacto", resultado: formularioContacto },
-  { nombre: "Mensaje de estado", selector: "#estado-formulario", resultado: estadoFormulario },
-  { nombre: "Campos del formulario", selector: "#nombre, #correo, #mensaje", resultado: camposFormulario },
+const elementosEsperados = [{
+    nombre: "Barra de navegación",
+    selector: ".barra-nav",
+    resultado: barraNavegacion
+  },
+  {
+    nombre: "Menú principal",
+    selector: ".menu",
+    resultado: menuPrincipal
+  },
+  {
+    nombre: "Enlaces del menú",
+    selector: ".menu a",
+    resultado: enlacesMenu
+  },
+  {
+    nombre: "Título del hero",
+    selector: ".hero-title",
+    resultado: tituloHero
+  },
+  {
+    nombre: "Sección servicios",
+    selector: "#servicios",
+    resultado: seccionServicios
+  },
+  {
+    nombre: "Tarjetas de servicios",
+    selector: ".tarjeta",
+    resultado: tarjetasServicios
+  },
+  {
+    nombre: "Enlace de correo",
+    selector: ".correo",
+    resultado: enlaceCorreo
+  },
+  {
+    nombre: "Botón del menú",
+    selector: "#btn-menu",
+    resultado: botonMenu
+  },
+  {
+    nombre: "Navegación principal",
+    selector: "#menu-principal",
+    resultado: navegacionPrincipal
+  },
+  {
+    nombre: "Formulario de contacto",
+    selector: "#formulario-contacto",
+    resultado: formularioContacto
+  },
+  {
+    nombre: "Mensaje de estado",
+    selector: "#estado-formulario",
+    resultado: estadoFormulario
+  },
+  {
+    nombre: "Campos del formulario",
+    selector: "#nombre, #correo, #mensaje",
+    resultado: camposFormulario
+  },
 ];
 
 /* =====================================================
    3. FUNCIONES
 ===================================================== */
 
-const comprobarElemento = ({ nombre, selector, resultado }) => {
+const comprobarElemento = ({
+  nombre,
+  selector,
+  resultado
+}) => {
   const esLista = Array.isArray(resultado) || resultado instanceof NodeList;
   const cantidad = esLista ? resultado.length : Number(resultado !== null);
 
@@ -172,9 +231,9 @@ const validarCorreo = () => {
         etiquetas.length < 2 ||
         etiquetas.some(
           (etiqueta) =>
-            etiqueta.length === 0 ||
-            etiqueta.length > 63 ||
-            !/^[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$/.test(etiqueta)
+          etiqueta.length === 0 ||
+          etiqueta.length > 63 ||
+          !/^[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$/.test(etiqueta)
         )
       ) {
         error = "Introduzca un dominio de correo válido.";

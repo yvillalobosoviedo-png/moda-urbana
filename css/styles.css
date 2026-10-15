@@ -75,6 +75,7 @@ ol {
 /* 3. Base */
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: var(--altura-header);
 }
 
 body {
@@ -118,12 +119,15 @@ a {
 }
 
 :focus-visible {
-  outline: 3px solid var(--color-acento-2);
+  outline: 3px solid var(--color-texto);
   outline-offset: 4px;
 }
 
-section {
-  scroll-margin-top: var(--altura-header);
+/* sobre fondos oscuros el foco cambia a turquesa (contraste mínimo 3:1) */
+.hero :focus-visible,
+.seccion-oscura :focus-visible,
+footer :focus-visible {
+  outline-color: var(--color-acento-2);
 }
 
 /* 4. Componentes */
@@ -289,7 +293,6 @@ section {
       transition: border-color var(--transicion), color var(--transicion);
 
       &:hover {
-        color: var(--color-acento);
         border-bottom-color: var(--color-acento);
       }
 
