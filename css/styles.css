@@ -570,7 +570,7 @@ footer :focus-visible {
   display: inline-block;
   margin-top: var(--espaciado-lg);
   font-family: var(--fuente-titulo);
-  font-size: clamp(1.4rem, 6vw, 3rem);
+  font-size: clamp(1.25rem, 4vw, 1.75rem);
   letter-spacing: 0.02em;
   overflow-wrap: anywhere;
   border-bottom: 5px solid var(--color-acento);
