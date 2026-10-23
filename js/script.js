@@ -269,8 +269,14 @@ const enviarFormulario = (evento) => {
   }
 
   formularioContacto.reset();
-  mostrarEstado("¡Mensaje enviado! Gracias por escribirnos, te responderemos pronto.");
-  console.log("Formulario válido (los datos no se muestran en consola)");
+  mostrarEstado("✅ ¡Mensaje enviado! Gracias por escribirnos, te responderemos pronto.");
+  console.log("✅ Formulario válido (los datos no se muestran en consola)");
+};
+
+const cerrarMenuAlSalir = (evento) => {
+  if (!barraNavegacion.contains(evento.relatedTarget)) {
+    cerrarMenu();
+  }
 };
 
 /* =====================================================
@@ -280,6 +286,7 @@ const enviarFormulario = (evento) => {
 if (botonMenu && navegacionPrincipal) {
   botonMenu.addEventListener("click", alternarMenu);
   document.addEventListener("keydown", cerrarConEscape);
+  barraNavegacion.addEventListener("focusout", cerrarMenuAlSalir);
   enlacesMenu.forEach((enlace) => enlace.addEventListener("click", cerrarMenu));
   pantallaAncha.addEventListener("change", cerrarMenu);
 }
@@ -298,7 +305,7 @@ if (formularioContacto && campoNombre && campoCorreo && campoMensaje) {
    5. INICIALIZACIÓN
 ===================================================== */
 
-console.log("script.js cargado correctamente");
+console.log("✅ script.js cargado correctamente");
 
 elementosEsperados.forEach(comprobarElemento);
 comprobarEnlacesMenu();

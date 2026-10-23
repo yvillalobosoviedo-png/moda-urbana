@@ -13,6 +13,8 @@
   --color-acento-2: #12b8a6;
   --color-claro: #ffffff;
   --color-error: #ff7a5c;
+  --color-acento-texto: #c22f0c;
+  /* naranja más oscuro para texto sobre fondo claro */
 
   /* Tipografía */
   --fuente-titulo: 'Anton', 'Impact', sans-serif;
@@ -23,7 +25,7 @@
   --fs-base: 1rem;
   --fs-md: 1.25rem;
   --fs-lg: clamp(2.25rem, 8vw, 4rem);
-  --fs-xl: clamp(4rem, 19vw, 9.5rem);
+  --fs-xl: clamp(2.75rem, 17vw, 9.5rem);
 
   /* Espaciado */
   --espaciado-sm: 0.5rem;
@@ -35,6 +37,8 @@
   --ancho-contenedor: 1100px;
   --espacio-lateral: max(1.25rem, calc((100% - var(--ancho-contenedor)) / 2));
   --altura-header: 4.5rem;
+  --desplazamiento-ancla: 6.5rem;
+  /* margen superior al saltar a una sección o enfocar un elemento */
   --borde: 3px solid var(--color-texto);
   --sombra-dura: 8px 8px 0 var(--color-texto);
   --radio: 0px;
@@ -75,7 +79,7 @@ ol {
 /* 3. Base */
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: var(--altura-header);
+  scroll-padding-top: var(--desplazamiento-ancla);
 }
 
 body {
@@ -84,11 +88,12 @@ body {
   font-family: var(--fuente-texto);
   font-size: var(--fs-base);
   line-height: 1.65;
-  overflow-x: hidden;
 }
 
 h1,
 h2 {
+  overflow-wrap: anywhere;
+  /* una palabra larga se parte en vez de salirse de la pantalla */
   font-family: var(--fuente-titulo);
   font-weight: 400;
   color: var(--color-texto);
@@ -128,6 +133,11 @@ a {
 .seccion-oscura :focus-visible,
 footer :focus-visible {
   outline-color: var(--color-acento-2);
+}
+
+/* La cinta inclinada sobresale unos píxeles: se recorta aquí, no en el body */
+main {
+  overflow-x: clip;
 }
 
 /* 4. Componentes */
@@ -173,28 +183,29 @@ footer :focus-visible {
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 0 var(--espaciado-lg);
+  gap: 0 var(--espaciado-md);
 
   .logo {
     font-family: var(--fuente-titulo);
-    font-size: 1.6rem;
+    font-size: clamp(1.35rem, 6vw, 1.6rem);
     text-transform: uppercase;
     letter-spacing: 0.03em;
     line-height: 1;
 
     a {
       display: flex;
+      flex-wrap: wrap;
       align-items: center;
       gap: 0.6rem;
     }
 
     img {
-      width: 2.5rem;
-      height: 2.5rem;
+      width: 2.25rem;
+      height: 2.25rem;
     }
 
     span {
-      color: var(--color-acento);
+      color: var(--color-acento-texto);
       margin-left: -0.35em;
       /* compensa el gap: se lee "ModaUrbana" como una sola marca */
     }
@@ -204,9 +215,9 @@ footer :focus-visible {
   .btn-menu {
     display: inline-flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: 0.6rem;
     min-height: 2.75rem;
-    padding: 0 1rem;
+    padding: 0 0.85rem;
     background-color: var(--color-claro);
     border: var(--borde);
     box-shadow: 4px 4px 0 var(--color-texto);
@@ -421,6 +432,10 @@ footer :focus-visible {
   color: var(--color-claro);
   overflow: hidden;
   /* la foto nunca se sale del hero */
+
+  .hero-texto {
+    min-width: 0;
+  }
 
   .hero-figure {
     position: absolute;
