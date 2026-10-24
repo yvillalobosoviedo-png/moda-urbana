@@ -13,6 +13,9 @@ const botonMenu = document.querySelector("#btn-menu");
 const navegacionPrincipal = document.querySelector("#menu-principal");
 const formularioContacto = document.querySelector("#formulario-contacto");
 const estadoFormulario = document.querySelector("#estado-formulario");
+const botonesCategoria = document.querySelectorAll(".btn-categoria");
+const botonesCerrarProductos = document.querySelectorAll(".btn-cerrar-productos");
+const gruposProductos = document.querySelectorAll(".productos-grupo");
 const campoNombre = document.querySelector("#nombre");
 const campoCorreo = document.querySelector("#correo");
 const campoMensaje = document.querySelector("#mensaje");
@@ -94,6 +97,16 @@ const elementosEsperados = [{
     nombre: "Mensaje de estado",
     selector: "#estado-formulario",
     resultado: estadoFormulario
+  },
+  {
+    nombre: "Botones de categoría",
+    selector: ".btn-categoria",
+    resultado: botonesCategoria
+  },
+  {
+    nombre: "Grupos de productos",
+    selector: ".productos-grupo",
+    resultado: gruposProductos
   },
   {
     nombre: "Campos del formulario",
@@ -279,6 +292,42 @@ const cerrarMenuAlSalir = (evento) => {
   }
 };
 
+const ocultarProductos = () => {
+  gruposProductos.forEach((grupo) => {
+    grupo.hidden = true;
+  });
+
+  botonesCategoria.forEach((boton) => {
+    boton.setAttribute("aria-expanded", "false");
+    boton.closest(".tarjeta").classList.remove("is-active");
+  });
+};
+
+const alternarProductos = (boton) => {
+  const grupo = document.getElementById(boton.getAttribute("aria-controls"));
+  const estabaAbierto = boton.getAttribute("aria-expanded") === "true";
+
+  ocultarProductos();
+  if (estabaAbierto) return;
+
+  grupo.hidden = false;
+  boton.setAttribute("aria-expanded", "true");
+  boton.closest(".tarjeta").classList.add("is-active");
+  grupo.scrollIntoView({
+    block: "start"
+  });
+  grupo.querySelector("h3").focus({
+    preventScroll: true
+  });
+};
+
+const cerrarProductos = (botonCerrar) => {
+  const idGrupo = botonCerrar.closest(".productos-grupo").id;
+
+  ocultarProductos();
+  document.querySelector(`[aria-controls="${idGrupo}"]`).focus();
+};
+
 /* =====================================================
    4. EVENTOS
 ===================================================== */
@@ -301,11 +350,21 @@ if (formularioContacto && campoNombre && campoCorreo && campoMensaje) {
   formularioContacto.addEventListener("input", () => mostrarEstado(""));
 }
 
+botonesCategoria.forEach((boton) => {
+  boton.addEventListener("click", () => alternarProductos(boton));
+});
+
+botonesCerrarProductos.forEach((boton) => {
+  boton.addEventListener("click", () => cerrarProductos(boton));
+});
+
 /* =====================================================
    5. INICIALIZACIÓN
 ===================================================== */
 
 console.log("✅ script.js cargado correctamente");
+
+ocultarProductos();
 
 elementosEsperados.forEach(comprobarElemento);
 comprobarEnlacesMenu();

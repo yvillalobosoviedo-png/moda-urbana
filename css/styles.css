@@ -13,8 +13,7 @@
   --color-acento-2: #12b8a6;
   --color-claro: #ffffff;
   --color-error: #ff7a5c;
-  --color-acento-texto: #c22f0c;
-  /* naranja más oscuro para texto sobre fondo claro */
+  --color-acento-texto: #c22f0c; /* naranja más oscuro para texto sobre fondo claro */
 
   /* Tipografía */
   --fuente-titulo: 'Anton', 'Impact', sans-serif;
@@ -37,8 +36,7 @@
   --ancho-contenedor: 1100px;
   --espacio-lateral: max(1.25rem, calc((100% - var(--ancho-contenedor)) / 2));
   --altura-header: 4.5rem;
-  --desplazamiento-ancla: 6.5rem;
-  /* margen superior al saltar a una sección o enfocar un elemento */
+  --desplazamiento-ancla: 6.5rem; /* margen superior al saltar a una sección o enfocar un elemento */
   --borde: 3px solid var(--color-texto);
   --sombra-dura: 8px 8px 0 var(--color-texto);
   --radio: 0px;
@@ -63,17 +61,17 @@ picture {
   display: block;
 }
 
-button,
-input,
-textarea,
-select {
+button, input, textarea, select {
   font: inherit;
   color: inherit;
 }
 
-ul,
-ol {
+ul, ol {
   list-style: none;
+}
+
+[hidden] {
+  display: none !important;
 }
 
 /* 3. Base */
@@ -92,8 +90,7 @@ body {
 
 h1,
 h2 {
-  overflow-wrap: anywhere;
-  /* una palabra larga se parte en vez de salirse de la pantalla */
+  overflow-wrap: anywhere; /* una palabra larga se parte en vez de salirse de la pantalla */
   font-family: var(--fuente-titulo);
   font-weight: 400;
   color: var(--color-texto);
@@ -206,8 +203,7 @@ main {
 
     span {
       color: var(--color-acento-texto);
-      margin-left: -0.35em;
-      /* compensa el gap: se lee "ModaUrbana" como una sola marca */
+      margin-left: -0.35em; /* compensa el gap: se lee "ModaUrbana" como una sola marca */
     }
   }
 
@@ -258,25 +254,15 @@ main {
         left: 0;
       }
 
-      &::before {
-        top: -6px;
-      }
-
-      &::after {
-        top: 6px;
-      }
+      &::before { top: -6px; }
+      &::after { top: 6px; }
     }
 
     &[aria-expanded="true"] .btn-menu-icono {
       background-color: transparent;
 
-      &::before {
-        transform: translateY(6px) rotate(45deg);
-      }
-
-      &::after {
-        transform: translateY(-6px) rotate(-45deg);
-      }
+      &::before { transform: translateY(6px) rotate(45deg); }
+      &::after { transform: translateY(-6px) rotate(-45deg); }
     }
   }
 
@@ -360,9 +346,7 @@ main {
 }
 
 @keyframes desplazar {
-  to {
-    transform: translateX(-50%);
-  }
+  to { transform: translateX(-50%); }
 }
 
 /* Tarjetas de servicios (Grid) */
@@ -372,11 +356,9 @@ main {
   gap: var(--espaciado-lg);
   margin-top: var(--espaciado-lg);
 
-  >li {
-    display: flex;
-    /* todas las tarjetas de una fila igual de altas */
-    min-width: 0;
-    /* evita que el contenido ensanche la columna */
+  > li {
+    display: flex; /* todas las tarjetas de una fila igual de altas */
+    min-width: 0; /* evita que el contenido ensanche la columna */
   }
 }
 
@@ -409,11 +391,189 @@ main {
   img {
     flex: none;
     width: 100%;
-    height: 16rem;
-    /* misma altura en todas, también en la tarjeta ancha */
+    height: 16rem; /* misma altura en todas, también en la tarjeta ancha */
     object-fit: cover;
     border: 2px solid var(--color-texto);
     background-color: var(--color-superficie);
+  }
+}
+
+/* Botones de categoría y de cierre */
+.btn-categoria,
+.btn-cerrar-productos {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 2.5rem;
+  padding: 0.4rem 0.9rem;
+  border: 2px solid var(--color-texto);
+  border-radius: var(--radio);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: background-color var(--transicion), color var(--transicion), box-shadow var(--transicion), transform var(--transicion);
+}
+
+/* Ver productos: relleno negro con flecha que gira al abrir */
+.btn-categoria {
+  align-self: flex-start;
+  margin-top: auto;
+  background-color: var(--color-texto);
+  color: var(--color-fondo);
+  box-shadow: 3px 3px 0 var(--color-acento);
+
+  &::after {
+    content: "";
+    width: 0.4rem;
+    height: 0.4rem;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: translateY(-2px) rotate(45deg);
+    transition: transform var(--transicion);
+  }
+
+  &:hover {
+    background-color: var(--color-acento);
+    color: var(--color-texto);
+    box-shadow: 3px 3px 0 var(--color-texto);
+  }
+
+  &[aria-expanded="true"] {
+    background-color: var(--color-acento);
+    color: var(--color-texto);
+    box-shadow: none;
+    transform: translate(3px, 3px);
+
+    &::after {
+      transform: translateY(2px) rotate(225deg);
+    }
+  }
+}
+
+/* Ocultar productos: borde, sin relleno */
+.btn-cerrar-productos {
+  background-color: transparent;
+  color: var(--color-texto);
+
+  &:hover {
+    background-color: var(--color-texto);
+    color: var(--color-fondo);
+  }
+}
+
+.tarjeta.is-active {
+  background-color: var(--color-superficie);
+  box-shadow: var(--sombra-dura);
+}
+
+/* Productos de la categoría elegida */
+.productos-grupo {
+  display: grid;
+  gap: var(--espaciado-lg);
+  margin-top: var(--espaciado-lg);
+  padding: var(--espaciado-lg);
+  background-color: var(--color-superficie);
+  border: var(--borde);
+
+  .productos-cabecera {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--espaciado-md);
+    padding-bottom: var(--espaciado-md);
+    border-bottom: var(--borde);
+
+    h3 {
+      position: relative;
+      padding-top: var(--espaciado-md);
+      font-size: clamp(2rem, 6vw, 3rem);
+      line-height: 1;
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 56px;
+        height: 8px;
+        background-color: var(--color-acento);
+        transform: skewX(-15deg);
+      }
+    }
+  }
+
+  .productos-lista {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+    gap: var(--espaciado-lg);
+
+    > li {
+      display: flex;
+      min-width: 0;
+    }
+  }
+}
+
+.producto {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-claro);
+  border: var(--borde);
+  transition: transform var(--transicion), box-shadow var(--transicion);
+
+  &:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: 6px 6px 0 var(--color-texto);
+  }
+
+  img {
+    width: 100%;
+    height: auto; /* anula el height="600" del HTML para que mande la proporción */
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-bottom: var(--borde);
+    background-color: var(--color-fondo);
+  }
+
+  h4 {
+    margin: var(--espaciado-md) var(--espaciado-md) 0;
+    font-family: var(--fuente-titulo);
+    font-size: 1.5rem;
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+
+  p {
+    margin: 0.4rem var(--espaciado-md) 0;
+    font-size: var(--fs-sm);
+  }
+
+  /* etiqueta de precio sobre la foto */
+  .producto-precio {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    margin: 0;
+    padding: 0.35rem 0.75rem;
+    background-color: var(--color-acento);
+    color: var(--color-texto);
+    border: 2px solid var(--color-texto);
+    font-size: 1rem;
+    font-weight: 700;
+    transform: rotate(3deg);
+  }
+
+  /* espacio inferior bajo la descripción */
+  h4 + p {
+    margin-bottom: var(--espaciado-md);
   }
 }
 
@@ -430,8 +590,7 @@ main {
   padding-inline: var(--espacio-lateral);
   background-color: var(--color-texto);
   color: var(--color-claro);
-  overflow: hidden;
-  /* la foto nunca se sale del hero */
+  overflow: hidden; /* la foto nunca se sale del hero */
 
   .hero-texto {
     min-width: 0;
@@ -689,8 +848,7 @@ main {
 
   /* Sin estilos hasta que JavaScript le agrega .is-visible (envío correcto) */
   .formulario-estado {
-    margin-top: calc(var(--espaciado-md) * -1);
-    /* anula el gap del grid mientras no se ve */
+    margin-top: calc(var(--espaciado-md) * -1); /* anula el gap del grid mientras no se ve */
     font-weight: 700;
 
     &.is-visible {
@@ -730,7 +888,6 @@ footer {
 
 /* 6. Responsive (de menor a mayor) */
 @media (min-width: 48rem) {
-
   /* Pantallas anchas: el menú siempre visible, sin botón */
   .barra-nav {
     .btn-menu {
@@ -800,6 +957,9 @@ footer {
     animation: none;
   }
 
+  .btn-categoria,
+  .btn-cerrar-productos,
+  .producto,
   .btn-menu,
   .btn-menu .btn-menu-icono,
   .btn-menu .btn-menu-icono::before,
