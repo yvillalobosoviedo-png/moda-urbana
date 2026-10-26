@@ -13,7 +13,8 @@
   --color-acento-2: #12b8a6;
   --color-claro: #ffffff;
   --color-error: #ff7a5c;
-  --color-acento-texto: #c22f0c; /* naranja más oscuro para texto sobre fondo claro */
+  --color-acento-texto: #c22f0c;
+  /* naranja más oscuro para texto sobre fondo claro */
 
   /* Tipografía */
   --fuente-titulo: 'Anton', 'Impact', sans-serif;
@@ -36,7 +37,8 @@
   --ancho-contenedor: 1100px;
   --espacio-lateral: max(1.25rem, calc((100% - var(--ancho-contenedor)) / 2));
   --altura-header: 4.5rem;
-  --desplazamiento-ancla: 6.5rem; /* margen superior al saltar a una sección o enfocar un elemento */
+  --desplazamiento-ancla: 6.5rem;
+  /* margen superior al saltar a una sección o enfocar un elemento */
   --borde: 3px solid var(--color-texto);
   --sombra-dura: 8px 8px 0 var(--color-texto);
   --radio: 0px;
@@ -61,12 +63,16 @@ picture {
   display: block;
 }
 
-button, input, textarea, select {
+button,
+input,
+textarea,
+select {
   font: inherit;
   color: inherit;
 }
 
-ul, ol {
+ul,
+ol {
   list-style: none;
 }
 
@@ -90,7 +96,8 @@ body {
 
 h1,
 h2 {
-  overflow-wrap: anywhere; /* una palabra larga se parte en vez de salirse de la pantalla */
+  overflow-wrap: anywhere;
+  /* una palabra larga se parte en vez de salirse de la pantalla */
   font-family: var(--fuente-titulo);
   font-weight: 400;
   color: var(--color-texto);
@@ -203,7 +210,8 @@ main {
 
     span {
       color: var(--color-acento-texto);
-      margin-left: -0.35em; /* compensa el gap: se lee "ModaUrbana" como una sola marca */
+      margin-left: -0.35em;
+      /* compensa el gap: se lee "ModaUrbana" como una sola marca */
     }
   }
 
@@ -254,15 +262,25 @@ main {
         left: 0;
       }
 
-      &::before { top: -6px; }
-      &::after { top: 6px; }
+      &::before {
+        top: -6px;
+      }
+
+      &::after {
+        top: 6px;
+      }
     }
 
     &[aria-expanded="true"] .btn-menu-icono {
       background-color: transparent;
 
-      &::before { transform: translateY(6px) rotate(45deg); }
-      &::after { transform: translateY(-6px) rotate(-45deg); }
+      &::before {
+        transform: translateY(6px) rotate(45deg);
+      }
+
+      &::after {
+        transform: translateY(-6px) rotate(-45deg);
+      }
     }
   }
 
@@ -346,7 +364,9 @@ main {
 }
 
 @keyframes desplazar {
-  to { transform: translateX(-50%); }
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 /* Tarjetas de servicios (Grid) */
@@ -356,9 +376,11 @@ main {
   gap: var(--espaciado-lg);
   margin-top: var(--espaciado-lg);
 
-  > li {
-    display: flex; /* todas las tarjetas de una fila igual de altas */
-    min-width: 0; /* evita que el contenido ensanche la columna */
+  >li {
+    display: flex;
+    /* todas las tarjetas de una fila igual de altas */
+    min-width: 0;
+    /* evita que el contenido ensanche la columna */
   }
 }
 
@@ -391,7 +413,8 @@ main {
   img {
     flex: none;
     width: 100%;
-    height: 16rem; /* misma altura en todas, también en la tarjeta ancha */
+    height: 16rem;
+    /* misma altura en todas, también en la tarjeta ancha */
     object-fit: cover;
     border: 2px solid var(--color-texto);
     background-color: var(--color-superficie);
@@ -510,7 +533,7 @@ main {
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
     gap: var(--espaciado-lg);
 
-    > li {
+    >li {
       display: flex;
       min-width: 0;
     }
@@ -534,9 +557,13 @@ main {
 
   img {
     width: 100%;
-    height: auto; /* anula el height="600" del HTML para que mande la proporción */
-    aspect-ratio: 4 / 3;
+    height: auto;
+    /* anula el height="600" del HTML para que mande la proporción */
+    aspect-ratio: 1 / 1;
+    /* cuadrada: sirve para fotos verticales y horizontales */
     object-fit: cover;
+    object-position: center 25%;
+    /* si recorta, conserva la parte de arriba */
     border-bottom: var(--borde);
     background-color: var(--color-fondo);
   }
@@ -572,7 +599,7 @@ main {
   }
 
   /* espacio inferior bajo la descripción */
-  h4 + p {
+  h4+p {
     margin-bottom: var(--espaciado-md);
   }
 }
@@ -590,7 +617,8 @@ main {
   padding-inline: var(--espacio-lateral);
   background-color: var(--color-texto);
   color: var(--color-claro);
-  overflow: hidden; /* la foto nunca se sale del hero */
+  overflow: hidden;
+  /* la foto nunca se sale del hero */
 
   .hero-texto {
     min-width: 0;
@@ -848,7 +876,8 @@ main {
 
   /* Sin estilos hasta que JavaScript le agrega .is-visible (envío correcto) */
   .formulario-estado {
-    margin-top: calc(var(--espaciado-md) * -1); /* anula el gap del grid mientras no se ve */
+    margin-top: calc(var(--espaciado-md) * -1);
+    /* anula el gap del grid mientras no se ve */
     font-weight: 700;
 
     &.is-visible {
@@ -888,6 +917,7 @@ footer {
 
 /* 6. Responsive (de menor a mayor) */
 @media (min-width: 48rem) {
+
   /* Pantallas anchas: el menú siempre visible, sin botón */
   .barra-nav {
     .btn-menu {
