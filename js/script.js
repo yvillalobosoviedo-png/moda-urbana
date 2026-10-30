@@ -336,7 +336,12 @@ if (botonMenu && navegacionPrincipal) {
   botonMenu.addEventListener("click", alternarMenu);
   document.addEventListener("keydown", cerrarConEscape);
   barraNavegacion.addEventListener("focusout", cerrarMenuAlSalir);
-  enlacesMenu.forEach((enlace) => enlace.addEventListener("click", cerrarMenu));
+  enlacesMenu.forEach((enlace) => {
+    enlace.addEventListener("click", () => {
+      cerrarMenu();           // Cierra el menú móvil
+      marcarEnlaceActivo(enlace); // Marca este enlace como activo
+    });
+  });
   pantallaAncha.addEventListener("change", cerrarMenu);
 }
 
@@ -358,13 +363,28 @@ botonesCerrarProductos.forEach((boton) => {
   boton.addEventListener("click", () => cerrarProductos(boton));
 });
 
+const marcarEnlaceActivo = (enlaceClickeado) => {
+  // Quitamos la marca de todos los enlaces
+  enlacesMenu.forEach((enlace) => {
+    enlace.removeAttribute("aria-current");
+  });
+
+  // Le ponemos la marca solo al enlace clickeado
+  enlaceClickeado.setAttribute("aria-current", "page");
+};
+
 /* =====================================================
    5. INICIALIZACIÓN
 ===================================================== */
-
 console.log("✅ script.js cargado correctamente");
 
 ocultarProductos();
+
+// Marca "Inicio" por defecto al cargar
+const enlaceInicio = document.querySelector('.menu a[href="#inicio"]');
+if (enlaceInicio) {
+  enlaceInicio.setAttribute("aria-current", "page");
+}
 
 elementosEsperados.forEach(comprobarElemento);
 comprobarEnlacesMenu();
